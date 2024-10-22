@@ -38,9 +38,8 @@ Este repositorio contiene el código fuente del simulador desarrollado para el p
 
 Para lanzar la simulación, ejecuta los siguientes comandos en tu terminal:
 
-    ```bash
+
     roslaunch solver_description launcher_colision_actor.launch
-    ```
 
 Esto iniciará Gazebo con el modelo del Solverbot, permitiéndote interactuar con el robot en el entorno simulado.
 Recuerda que escucha el topico cmd_vel por lo cual es perfectamente manejable con el paquete *teleop_twist_
@@ -48,11 +47,9 @@ teleop_twist_joy*  o  *teleop_twist_keyboard*
 
 Los mismos se pueden correr con los comandos:
 
-    ```bash
     rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 
     rosrun teleop_twist_joy teleop_node
-    ```
 # Contribuciones
 ¡Las contribuciones son bienvenidas! Si deseas mejorar este proyecto, por favor sigue estos pasos:
 Haz un fork del repositorio.
