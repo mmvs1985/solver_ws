@@ -1,6 +1,6 @@
 # Simulator Solverbot person Follower
 
-![imagen mostrando el funcionamiento](https://github.com/mmvs1985/solver_ws/image-in-action.png)
+![imagen mostrando el funcionamiento](https://github.com/mmvs1985/solver_ws/blob/main/image-in-action.png)
 ## Descripción
 
 Este repositorio contiene el código fuente del simulador desarrollado para el proyecto "Creación de un robot de servicio en simulación Gazebo-ROS", según lo detallado en la tesis de Marcos Viera. El objetivo principal de este proyecto es desarrollar un robot de servicio simulado, capaz de asistir a personas mayores, utilizando las plataformas Gazebo y ROS (Robot Operating System).
