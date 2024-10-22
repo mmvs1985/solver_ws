@@ -57,8 +57,9 @@ Crea una rama para tu función (git checkout -b feature/AmazingFeature).
 Realiza tus cambios y haz commit de ellos (git commit -m 'Add some AmazingFeature').
 Empuja tus cambios a la rama (git push origin feature/AmazingFeature).
 Abre una solicitud de pull.
-Licencia
-Este proyecto está licenciado bajo la Licencia CC BY-NC-SA - consulta el archivo LICENSE para más detalles.
+
+# Licencia
+Este proyecto está licenciado bajo la Licencia CC BY-NC-SA
 Contacto
 Marcos Viera
 [Email](mailto://mmvsdev1985@gmail.com)
