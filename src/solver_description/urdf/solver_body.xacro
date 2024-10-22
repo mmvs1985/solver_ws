@@ -1,0 +1,198 @@
+<robot name="solverBot_body" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+  <!-- constants mio -->
+
+  <xacro:property name="pi_const" value="3.14159265"/>
+   
+  <!-- Body dimensions -->
+
+  <xacro:property name="body_link_x_dim" value="0.429"/>
+  <xacro:property name="body_link_y_dim" value="0.335"/>
+  <xacro:property name="body_link_z_dim" value="0.346"/>
+  <xacro:property name="body_volume" value="${body_link_x_dim * body_link_y_dim * body_link_z_dim}"/><!-- 0,04972539-->
+
+  <!-- wheel dimensions -->
+
+  <xacro:property name="wheel_link_radius" value="0.0755"/>
+  <xacro:property name="wheel_link_length" value="0.055"/>
+  <xacro:property name="wheel_link_z_location" value="-0.110"/>
+  <xacro:property name="wheel_link_radius_sq" value="${wheel_link_radius * wheel_link_radius}"/><!-- 0,00570025-->
+
+
+  <xacro:property name="wheel_volume" value="${pi_const * wheel_link_radius_sq * wheel_link_length }"/><!-- 0,000984932-->
+  <xacro:property name="wheel_mesh" value="package://solver_description/meshes/wheelv3.dae"/>
+
+  <!-- material density -->
+
+  <xacro:property name="body_density" value="131.20"/>
+  <xacro:property name="wheel_density" value="837.23"/>
+
+  <!-- robot body and wheel mass -->
+
+  <xacro:property name="body_mass" value="${body_density * body_volume}"/>
+  <xacro:property name="wheel_mass" value="${wheel_density * wheel_volume}"/><!--61,79071 -->
+
+  <!-- moments of inertia of the wheel -->
+
+  <xacro:property name="Iz_wheel" value="${0.5 * wheel_mass * wheel_link_radius_sq}"/>
+  <xacro:property name="I_wheel" value="-${(1.0/12.0) * wheel_mass * (3.0 * wheel_link_radius_sq + wheel_link_length * wheel_link_length)}"/>
+
+  <!-- This macro defines the complete inertial section of the wheel -->
+  <!-- it's used later in the code -->
+
+
+  <xacro:macro name="inertia_wheel">
+      <inertial>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <mass value="${wheel_mass}"/>
+          <inertia ixx="0.0013393845833333333" ixy="0.0" ixz="0.0" iyy="0.0013393845833333333" iyz="0.0" izz="0.0023371024999999995"/>
+      </inertial>
+      
+  </xacro:macro>
+
+  <!-- over here we include the file that defines extra Gazebo options and motion control driver -->
+  <xacro:include filename="robot.gazebo"/>
+
+  <!-- ############################################### -->
+  <!-- from here link and joints definitions -->
+  <!-- ############################################### -->
+
+  <!-- define this dummy or Gazebo will complain -->
+  <link name="dummy">
+  </link>
+
+  <joint name="dummy_joint" type="fixed" >
+      <parent link="dummy"/>
+      <child  link="body_link" />
+  </joint>
+
+  <!-- ############################################### -->
+  <!-- from here body link and joints definitions -->
+  <!-- ############################################### -->
+
+  <!-- This is the body of the robot -->    
+  <link name="body_link">
+        <visual>  
+            <geometry>
+                <mesh filename="package://solver_description/meshes/baseCaja.dae" />
+            </geometry>
+            <origin rpy="0 0 -1.5708" xyz="0 0 0"/>
+        </visual>
+        <visual>  
+            <geometry>
+                <mesh filename="package://solver_description/meshes/tapacaja.stl" />
+            </geometry>
+            <origin rpy="0 0 -1.5708" xyz="0 0 0"/>
+       
+        </visual>
+        <visual>  
+            <geometry>
+                <mesh filename="package://solver_description/meshes/screw_hex.dae" />
+            </geometry>
+            <origin rpy="0 0 -1.5708" xyz="0 0 0"/>
+       
+        </visual>
+      <collision>
+          <geometry>
+              <box size="${body_link_x_dim} ${body_link_y_dim} ${body_link_z_dim}" />
+          </geometry>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+      </collision>
+      <inertial>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <mass value="${body_mass}"/>
+          <inertia
+          ixx="${(1/12) * body_mass * (body_link_y_dim * body_link_y_dim + body_link_z_dim*body_link_z_dim)}" 
+          iyy="${(1/12) * body_mass * (body_link_x_dim * body_link_x_dim + body_link_z_dim*body_link_z_dim)}" 
+          izz="${(1/12) * body_mass * (body_link_y_dim * body_link_x_dim + body_link_z_dim*body_link_x_dim)}" 
+          ixy="0" ixz="0" iyz="0" />
+      </inertial>
+      <!-- close body link -->
+  </link>
+
+  <link name="aileron">
+    <visual>  
+        <geometry>
+            <mesh filename="package://solver_description/meshes/aleron_frontal.dae" />
+        </geometry>
+        <origin rpy="0 0 -1.5708" xyz="0 0 0"/>
+    </visual>
+    <visual>  
+        <geometry>
+            <mesh filename="package://solver_description/meshes/Fender_R.dae" />
+        </geometry>
+        <origin rpy="0 0 -1.5708" xyz="0 0 0"/>
+    </visual>
+    <visual>  
+        <geometry>
+            <mesh filename="package://solver_description/meshes/Fender_L.dae" />
+        </geometry>
+        <origin rpy="0 0 -1.5708" xyz="0 0 0"/>
+    </visual>
+    <visual>  
+        <geometry>
+            <mesh filename="package://solver_description/meshes/cover.dae" />
+        </geometry>
+        <origin rpy="0 0 -1.5708" xyz="0 0 0"/>
+    </visual>
+    <visual>  
+        <geometry>
+            <mesh filename="package://solver_description/meshes/bumpers.dae" />
+        </geometry>
+        <origin rpy="0 0 1.5708" xyz="0 0 0"/>
+    </visual>
+  <collision>
+      <geometry>
+          <box size="${body_link_x_dim} ${body_link_y_dim} ${body_link_z_dim}" />
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+  </collision>
+  <!-- close body link -->
+</link>
+<joint name="aileron_joint" type="fixed" >
+    <parent link="dummy"/>
+    <child  link="aileron" />
+</joint>
+<link name="light">
+    <visual>  
+        <geometry>
+            <mesh filename="package://solver_description/meshes/Front_Light.dae" />
+        </geometry>
+        <origin rpy="0 0 1.5708" xyz="-0.025 0 0"/>
+    </visual>
+  <collision>
+      <geometry>
+          <box size="${body_link_x_dim} ${body_link_y_dim} ${body_link_z_dim}" />
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+  </collision>
+  <!-- close body link -->
+</link>
+<joint name="light_joint" type="fixed" >
+    <parent link="dummy"/>
+    <child  link="light" />
+</joint>
+  <!-- ############################################### -->
+  <!-- finish here body link and joints definitions -->
+  <!-- ############################################### -->
+
+  <!-- ############################################### -->
+  <!-- start here wheels link and joints definitions -->
+  <!-- ############################################### -->
+   
+  <xacro:include filename="solver_wheel.xacro"/>
+  
+  <!-- This is the back right wheel of the robot -->
+  <xacro:solver_wheel wheel_prefix="1" />
+  
+  <!-- This is the back left wheel of the robot -->
+  <xacro:solver_wheel wheel_prefix="2" link_visual_origin_r ="1.570795" joint_origin_x="${body_link_x_dim/2-1.2*wheel_link_radius +0.05}" joint_origin_y="${body_link_y_dim/2 +wheel_link_length/2 }" joint_origin_yaw="${-pi_const/2}" joint_axis="-1"/>
+   
+  <!-- This is the front rigth wheel of the robot -->
+  <xacro:solver_wheel wheel_prefix="3" link_visual_origin_r ="1.570795" joint_origin_x="${body_link_x_dim/2-1.2*wheel_link_radius +0.05}" />
+  
+  <!-- This is the front left wheel of the robot -->
+  <xacro:solver_wheel wheel_prefix="4" link_visual_origin_r ="1.570795" joint_origin_y="${body_link_y_dim/2 +wheel_link_length/2}"  joint_origin_yaw="${-pi_const/2}" joint_axis="-1"/>
+
+</robot>
