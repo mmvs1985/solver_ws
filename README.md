@@ -1,7 +1,6 @@
-# Simulador Solverbot
+# Simulator Solverbot person Follower
 
-![Gazebo-ROS Logo](https://www.osrfoundation.org/images/gazebo_logo.png)
-
+![imagen mostrando el funcionamiento](https://github.com/mmvs1985/solver_ws/image-in-action.png)
 ## Descripción
 
 Este repositorio contiene el código fuente del simulador desarrollado para el proyecto "Creación de un robot de servicio en simulación Gazebo-ROS", según lo detallado en la tesis de Marcos Viera. El objetivo principal de este proyecto es desarrollar un robot de servicio simulado, capaz de asistir a personas mayores, utilizando las plataformas Gazebo y ROS (Robot Operating System).
@@ -12,6 +11,12 @@ Este repositorio contiene el código fuente del simulador desarrollado para el p
 - **Integración con ROS**: Uso de ROS para la gestión de nodos, comunicación y control del robot.
 - **Visión Computacional**: Implementación de detección de personas utilizando OpenCV y algoritmos de Histogramas de Gradientes Orientados (HOG).
 - **Interacción Humano-Robot**: El robot es capaz de seguir a una persona en el entorno simulado, manteniendo una distancia segura.
+- **Interacción Humano-Robot**: El robot es capaz de seguir a una persona en el entorno simulado, manteniendo una distancia segura.
+
+## Verlo en acción
+
+![alt text](http://url/to/img.png)
+[aqui](https://youtu.be/-oqxYBeqeW4?si=y1y5I2vw5ApOIhRW) 
 
 ## Instalación
 
