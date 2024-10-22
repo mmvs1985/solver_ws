@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+
+  <param name="floor" command="$(find xacro)/xacro --inorder '$(find solver_description)/urdf/floor.urdf.xacro'" />
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <!-- <arg name="world_name" value="$(find solver_description)/world/actor_collisions.world"/>  -->
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+    <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description" 
+  command="$(find xacro)/xacro '$(find solver_description)/urdf/solver.xacro'" />
+  
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+       args="-urdf -model solverBot -param robot_description" />
+
+       <node name="wooden_floor_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+       args="-urdf -model wooden_floor -param floor -x 0 -y 0 -z 0 -Y 0" />
+  <!-- <arg name="namespace" default="/"/> -->
+  <!-- <node name= "camera_read" pkg= "solver_description" type="camera_read.py" output="screen" required = "true"/>
+  <node name= "lidar_read" pkg= "solver_description" type="lidar_read.py" output="screen" required = "true"/> -->
+
+</launch>
