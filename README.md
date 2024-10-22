@@ -1,4 +1,4 @@
-# Simulator Solverbot person Follower
+# Simulating Solverbot person Follower with ROS 1 and Gazebo
 
 ![imagen mostrando el funcionamiento](https://github.com/mmvs1985/solver_ws/blob/main/image-in-action.png)
 ## Descripción
@@ -15,7 +15,6 @@ Este repositorio contiene el código fuente del simulador desarrollado para el p
 
 ## Verlo en acción
 
-![alt text](http://url/to/img.png)
 [aqui](https://youtu.be/-oqxYBeqeW4?si=y1y5I2vw5ApOIhRW) 
 
 ## Instalación
