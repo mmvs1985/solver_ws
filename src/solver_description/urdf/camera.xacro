@@ -40,10 +40,11 @@
       <update_rate>30.0</update_rate>
       <camera name="head">
         <horizontal_fov>1.3962634</horizontal_fov>
-        <image>
-          <width>800</width>
-          <height>600</height>
+        <image>          
+          <width>1920</width>
+          <height>1080</height>
           <format>R8G8B8</format>
+          <!-- 1920*1080 = 1080P camera -->
         </image>
         <clip>
           <near>0.02</near>
@@ -60,7 +61,7 @@
       </camera>
       <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
         <alwaysOn>true</alwaysOn>
-        <updateRate>0.0</updateRate>
+        <updateRate>30</updateRate>
         <cameraName>rrbot/camera1</cameraName>
         <imageTopicName>image_raw</imageTopicName>
         <cameraInfoTopicName>camera_info</cameraInfoTopicName>
