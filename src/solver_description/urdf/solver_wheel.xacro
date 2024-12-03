@@ -2,12 +2,17 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="solver_wheel">
 
-	<xacro:macro name="solver_wheel" params="wheel_prefix link_visual_origin_r:=1.570795 joint_origin_x:=${-body_link_x_dim/2+1.2*wheel_link_radius -0.05} joint_origin_y:=${-body_link_y_dim/2 -wheel_link_length/2 } joint_origin_yaw:=${pi_const/2} joint_axis:=1">
+	<xacro:macro name="solver_wheel" params="wheel_prefix link_visual_origin_r:=1.570795 
+	joint_origin_x:=${-body_link_x_dim/2+1.2*wheel_link_radius -0.05} 
+	joint_origin_y:=${-body_link_y_dim/2 -wheel_link_length/2 } 
+	joint_origin_yaw:=${pi_const/2} 
+	joint_axis:=1">
 
 		<joint name="wheel${wheel_prefix}_joint" type="continuous" >
 			<parent link="body_link"/>
 			<child  link="wheel${wheel_prefix}_link" />
-			<origin xyz="${joint_origin_x} ${joint_origin_y} ${wheel_link_z_location }" rpy="0 0 ${joint_origin_yaw}" />
+			<origin xyz="${joint_origin_x} ${joint_origin_y} ${wheel_link_z_location }" 
+			rpy="0 0 ${joint_origin_yaw}" />
 			<axis xyz="${joint_axis} 0 0"/>
 			<limit effort="1000" velocity="1000"/>
 			<dynamics damping="1.0" friction="1.0"/>

@@ -43,11 +43,11 @@ class sensor_cheking:
     def lidar_data(self, data):
         # print("lidar:",data)
         # print("dataRanges: ",len(data.ranges))
-        region_a = round(min(data.ranges[280:300]),3)
-        region_b = round(min(data.ranges[301:420]),3) 
-        region_c = round(min( data.ranges[421:440]),3)
-        region_atr_iz = round(min( data.ranges[0:280]),3)
-        region_atr_der = round(min( data.ranges[441:720]),3)
+        region_a = round(min(data.ranges[141:150]),3)
+        region_b = round(min(data.ranges[151:210]),3) 
+        region_c = round(min( data.ranges[211:220]),3)
+        region_atr_iz = round(min( data.ranges[0:140]),3)
+        region_atr_der = round(min( data.ranges[221:360]),3)
         print("A :" ,region_a , " B :", region_b , " C: ", region_c , " D: ", region_atr_iz, " E: ", region_atr_der  )
         if region_b > 2 and region_b < 30 and self.robot_linear_vel<=0:
             self.changeLinearVel(region_b)
